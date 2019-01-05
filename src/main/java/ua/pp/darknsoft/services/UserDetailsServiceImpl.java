@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.pp.darknsoft.models.AppRole;
 import ua.pp.darknsoft.models.AppUser;
 import ua.pp.darknsoft.models.RoledUser;
 import ua.pp.darknsoft.repositories.UserRepository;

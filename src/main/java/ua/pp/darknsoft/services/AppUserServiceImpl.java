@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.models.AppUser;
 import ua.pp.darknsoft.repositories.UserRepository;
 
-import java.util.List;
-
 @Service
 public class AppUserServiceImpl implements AppUserService {
     @Autowired

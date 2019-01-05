@@ -45,6 +45,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // And Setting PassswordEncoder
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 
+        //auth.eraseCredentials(false);
+
     }
 
     @Override
