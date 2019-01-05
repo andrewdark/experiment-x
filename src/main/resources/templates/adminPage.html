@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+    <link rel="stylesheet" th:href="@{/css/head-menu.css}">
+    <link rel="stylesheet" th:href="@{/css/blue-table.css}">
+</head>
+<body>
+<div th:replace="fragments/headers :: ${headers}"></div>
+<div th:replace="fragments/admin_bodies :: ${bodies}"></div>
+</body>
+</html>
