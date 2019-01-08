@@ -29,6 +29,10 @@ public class AppUser {
     private Long version;
     @OneToMany(mappedBy = "appUser")
     private Set<RoledUser> roledUsers = new HashSet<>();
+    @OneToMany(mappedBy = "appUser")
+    private  Set<UserTasks> userTasks = new HashSet<>();
+
+    private Profile profile;
 
     public Long getId() {
         return id;
@@ -92,5 +96,21 @@ public class AppUser {
 
     public void setRoledUsers(Set<RoledUser> roledUsers) {
         this.roledUsers = roledUsers;
+    }
+
+    public Set<UserTasks> getUserTasks() {
+        return userTasks;
+    }
+
+    public void setUserTasks(Set<UserTasks> userTasks) {
+        this.userTasks = userTasks;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }
