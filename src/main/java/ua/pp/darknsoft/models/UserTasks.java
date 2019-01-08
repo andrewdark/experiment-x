@@ -52,7 +52,7 @@ public class UserTasks {
     @JoinColumn(name = "task_id", insertable = false, updatable = false)
     private Task task;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = FetchType.LAZY, optional = false, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @JoinColumn(unique = true)
     private Solution solution;
 
