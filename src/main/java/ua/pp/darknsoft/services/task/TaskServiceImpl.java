@@ -1,4 +1,4 @@
-package ua.pp.darknsoft.services;
+package ua.pp.darknsoft.services.task;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

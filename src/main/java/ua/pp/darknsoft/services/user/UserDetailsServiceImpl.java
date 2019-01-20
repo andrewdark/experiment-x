@@ -1,4 +1,4 @@
-package ua.pp.darknsoft.services;
+package ua.pp.darknsoft.services.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ua.pp.darknsoft.models.AppUser;
+import ua.pp.darknsoft.models.User;
 import ua.pp.darknsoft.models.RoledUser;
 import ua.pp.darknsoft.repositories.UserRepository;
 
@@ -16,7 +16,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-@Service
+/*@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
@@ -25,12 +25,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
 
-        Optional<AppUser> appUserOptional = userRepository.findByUserName(userName);
+        Optional<User> appUserOptional = userRepository.findByUsername(userName);
         if (appUserOptional.isEmpty()) {
             System.out.println("User not found! " + userName);
             throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
-        AppUser appUser = appUserOptional.get();
+        User appUser = appUserOptional.get();
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         Set<RoledUser> roledUsers = appUser.getRoledUsers();
         if (roledUsers != null && !roledUsers.isEmpty()) {
@@ -39,8 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
         }
 
-        return new org.springframework.security.core.userdetails.User(appUser.getUserName(),
-                appUser.getEncryptedPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(appUser.getUsername(),
+                appUser.getPassword(), grantedAuthorities);
 
     }
-}
+}*/

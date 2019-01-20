@@ -1,4 +1,4 @@
-package ua.pp.darknsoft.services;
+package ua.pp.darknsoft.services.task;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

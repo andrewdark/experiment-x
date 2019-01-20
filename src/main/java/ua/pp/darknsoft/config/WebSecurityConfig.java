@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 
 import javax.sql.DataSource;
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        // Setting Service to find User in the database.
+        // Setting Service to findById User in the database.
         // And Setting PassswordEncoder
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 
@@ -87,4 +87,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
 
     }
-}
+}*/

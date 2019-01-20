@@ -54,12 +54,12 @@ public class RoledUser {
 
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private AppUser appUser;
+    private User appUser;
 
     public RoledUser() {
     }
 
-    public RoledUser(AppRole appRole, AppUser appUser) {
+    public RoledUser(AppRole appRole, User appUser) {
         //SET values to the Classes fields.
         this.appUser = appUser;
         this.appRole = appRole;
@@ -83,7 +83,7 @@ public class RoledUser {
         return appRole;
     }
 
-    public AppUser getAppUser() {
+    public User getAppUser() {
         return appUser;
     }
 }

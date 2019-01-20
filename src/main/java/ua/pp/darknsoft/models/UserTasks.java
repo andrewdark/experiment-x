@@ -47,7 +47,7 @@ public class UserTasks {
     private LocalDateTime addedOn = LocalDateTime.now();
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private AppUser appUser;
+    private User appUser;
     @ManyToOne
     @JoinColumn(name = "task_id", insertable = false, updatable = false)
     private Task task;
@@ -59,7 +59,7 @@ public class UserTasks {
     public UserTasks() {
     }
 
-    public UserTasks(AppUser appUser, Task task) {
+    public UserTasks(User appUser, Task task) {
         this.appUser = appUser;
         this.task = task;
         this.id.userId = appUser.getId();
@@ -84,11 +84,11 @@ public class UserTasks {
         this.addedOn = addedOn;
     }
 
-    public AppUser getAppUser() {
+    public User getAppUser() {
         return appUser;
     }
 
-    public void setAppUser(AppUser appUser) {
+    public void setAppUser(User appUser) {
         this.appUser = appUser;
     }
 

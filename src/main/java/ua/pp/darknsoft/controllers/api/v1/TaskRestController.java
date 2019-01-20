@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.pp.darknsoft.models.Task;
-import ua.pp.darknsoft.services.TaskService;
+import ua.pp.darknsoft.services.task.TaskService;
 
 import java.util.Optional;
 
