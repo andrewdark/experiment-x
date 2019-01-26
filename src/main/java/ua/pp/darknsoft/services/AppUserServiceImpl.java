@@ -39,6 +39,11 @@ public class AppUserServiceImpl implements AppUserService {
         return userRepository.existsByUserName(appUser.getUserName().toLowerCase());
     }
 
+    @Transactional(readOnly = true)
+    public Boolean isExists(String username) {
+        return userRepository.existsByUserName(username.toLowerCase());
+    }
+
     @Override
     public AppUser createAppUser(AppUser appUserForm) {
         AppUser savedUser = new AppUser();
@@ -49,4 +54,15 @@ public class AppUserServiceImpl implements AppUserService {
 
         return savedUser;
     }
+
+    @Override
+    public AppUser createAppUser(String username, String password){
+        AppUser user = new AppUser();
+        user.setUserName(username.toLowerCase());
+        user.setEncryptedPassword(bCryptPasswordEncoder.encode(password));
+        if (!isExists(username))
+            return userRepository.save(user);
+        return user;
+    }
+
 }

@@ -16,5 +16,10 @@ public interface AppUserService {
     @Transactional(readOnly = true)
     Boolean isExists(AppUser appUser);
 
+    @Transactional(readOnly = true)
+    Boolean isExists(String username);
+
     AppUser createAppUser(AppUser appUserForm);
+
+    AppUser createAppUser(String username, String password);
 }
