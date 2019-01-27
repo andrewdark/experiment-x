@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "97ee3e6e1f98f816550f",
-    "url": "/static/css/main.fcec1ce4.chunk.css"
+    "revision": "fed640d9c530cde07c68",
+    "url": "/static/css/main.06044586.chunk.css"
   },
   {
-    "revision": "97ee3e6e1f98f816550f",
-    "url": "/static/js/main.97ee3e6e.chunk.js"
+    "revision": "fed640d9c530cde07c68",
+    "url": "/static/js/main.fed640d9.chunk.js"
   },
   {
-    "revision": "e0102d925b531b9c73d8",
+    "revision": "e048d9254e6519f3ad3c",
     "url": "/static/css/1.459784e7.chunk.css"
   },
   {
-    "revision": "e0102d925b531b9c73d8",
-    "url": "/static/js/1.e0102d92.chunk.js"
+    "revision": "e048d9254e6519f3ad3c",
+    "url": "/static/js/1.e048d925.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -132,7 +132,7 @@ self.__precacheManifest = [
     "url": "/static/media/Roboto-Bold.e31fcf18.ttf"
   },
   {
-    "revision": "febb419ee4afce9d9219c75420e328b5",
+    "revision": "9a5971d4ac4d42d6b0205be893dfe12e",
     "url": "/index.html"
   }
 ];

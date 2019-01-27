@@ -18,13 +18,8 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.savedrequest.NullRequestCache;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -70,7 +65,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.eraseCredentials(true);
         // Setting Service to find User in the database.
         // And Setting PassswordEncoder
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
@@ -80,26 +74,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(bCryptPasswordEncoder().encode("user"))
                 .roles("USER");
 
-        auth.eraseCredentials(true);
-
-    }
-
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("OPTIONS");
-        config.addAllowedMethod("GET");
-        config.addAllowedMethod("POST");
-        config.addAllowedMethod("PUT");
-        config.addAllowedMethod("DELETE");
-        config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
-                "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
     }
 
     @Override
@@ -107,50 +81,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
 
-        http.cors();
-
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/register").permitAll()
-                .anyRequest().authenticated().and()
-                .requestCache()
-                .requestCache(new NullRequestCache());
+                .antMatchers(
+                        "/",
+                        "/register",
+                        "/static/css/**",
+                        "/static/media/**",
+                        "/static/js/**").permitAll()
+                .anyRequest().authenticated();
 
-        http.formLogin().loginProcessingUrl("/j_spring_security_check")
-                .and().logout().invalidateHttpSession(true).deleteCookies("JSESSIONID");
+        http.formLogin()
+                .and()
+                .logout().deleteCookies("JSESSIONID");
 
         http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint);
         http.formLogin().successHandler(authenticationSuccessHandler);
         http.formLogin().failureHandler(authenticationFailureHandler);
 
-        /*// The pages does not require login
-        http.authorizeRequests().antMatchers( "/login", "/logout", "/", "index").permitAll();
-
-        // /userInfo page requires login as ROLE_USER or ROLE_ADMIN.
-        // If no login, it will redirect to /login page.
-        http.authorizeRequests().antMatchers("/userPage","/user/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
-
-        // For ADMIN only.
-        http.authorizeRequests().antMatchers("/adminPage", "/admin/**").access("hasRole('ROLE_ADMIN')");
-
-        // When the user has logged in as XX.
-        // But access a page that requires role YY,
-        // AccessDeniedException will be thrown.
-        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
-
-        // Config for Login Form
-        /*http.authorizeRequests().and().formLogin()//
-                // Submit URL of login page.
-                .loginProcessingUrl("/j_spring_security_check") // Submit URL
-                .loginPage("/login")//
-                .defaultSuccessUrl("/")//
-                .failureUrl("/login?error=true")//
-                .usernameParameter("username")//
-                .passwordParameter("password")
-                // Config for Logout Page
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").invalidateHttpSession(true).deleteCookies("JSESSIONID");*/
-
-
-        // Config Remember Me.
         http.authorizeRequests().and() //
                 .rememberMe().tokenRepository(this.persistentTokenRepository()) //
                 .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h

@@ -23,10 +23,10 @@ public class MainController {
             return new ResponseEntity<AppUser>(user, HttpStatus.OK);
     }
 
-    /*@PostMapping(value = "/login")
+    @PostMapping(value = "/login")
     public ResponseEntity<Void> login(Authentication authentication) {
         return new ResponseEntity<>(HttpStatus.OK);
-    }*/
+    }
 
     @PostMapping(value = "/register")
     public ResponseEntity<Void> register(@RequestParam String username, @RequestParam String password, Authentication authentication) {
@@ -35,9 +35,6 @@ public class MainController {
         }
         appUserService.createAppUser(username, password);
         return new ResponseEntity<>(HttpStatus.CREATED);
-        //HttpHeaders headers = new HttpHeaders();
-        //headers.add("Location", "/login");
-        //return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
 
