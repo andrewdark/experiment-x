@@ -14,6 +14,8 @@ public class Task {
     private String taskName;
     @Lob
     private String description;
+
+    private String signature;
     @Enumerated(value = EnumType.STRING)
     private Level level;
     @ManyToMany(mappedBy = "tasks")
@@ -79,5 +81,13 @@ public class Task {
 
     public void setTags(Set<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

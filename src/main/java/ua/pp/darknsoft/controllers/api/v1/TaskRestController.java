@@ -7,10 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ua.pp.darknsoft.models.Level;
 import ua.pp.darknsoft.models.Task;
 import ua.pp.darknsoft.services.TaskService;
 
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api/v1")
@@ -49,6 +50,7 @@ public class TaskRestController {
         }
         Task currentTask = optionalTask.get();
         currentTask.setDescription(task.getDescription());
+        currentTask.setSignature(task.getSignature());
         currentTask.setLevel(task.getLevel());
         currentTask.setTags(task.getTags());
         currentTask.setTaskName(task.getTaskName());
@@ -60,5 +62,11 @@ public class TaskRestController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         taskService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/level")
+    public ResponseEntity<List<Level>> getLevels() {
+
+        return new ResponseEntity<List<Level>>(Arrays.asList(Level.values()), HttpStatus.OK);
     }
 }
