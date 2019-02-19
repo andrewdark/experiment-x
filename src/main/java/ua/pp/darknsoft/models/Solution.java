@@ -3,7 +3,6 @@ package ua.pp.darknsoft.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Entity
 public class Solution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +14,6 @@ public class Solution {
     @NotNull
     @Column(nullable = false)
     private String code;
-
-    //private UserTasks userTasks;
 
     public Long getId() {
         return id;
@@ -50,11 +47,4 @@ public class Solution {
         this.code = code;
     }
 
-//    public UserTasks getUserTasks() {
-//        return userTasks;
-//    }
-//
-//    public void setUserTasks(UserTasks userTasks) {
-//        this.userTasks = userTasks;
-//    }
 }

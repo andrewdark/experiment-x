@@ -2,58 +2,60 @@ package ua.pp.darknsoft.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
-@Entity
+@Entity(name = "Test")
+@Table(name = "tests")
 public class Test {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String testName;
     @Version
     private Long version;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "test_gen")
+    @SequenceGenerator(name="test_gen", sequenceName = "test_seq", allocationSize=1)
     @NotNull
-    private String result;
-    @ManyToOne(fetch = FetchType.LAZY) //be careful - LAZY
-    @JoinColumn(name = "task_id", nullable = false)
+    private Long id;
+
+    @NotNull
+    private String name;
+
+    @NotNull
+    private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
     private Task task;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTestName() {
-        return testName;
-    }
-
-    public void setTestName(String testName) {
-        this.testName = testName;
-    }
 
     public Long getVersion() {
         return version;
     }
-
     public void setVersion(Long version) {
         this.version = version;
     }
 
-    public String getResult() {
-        return result;
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public String getName() {
+        return name;
+    }
+    public void setName(String testName) {
+        this.name = name;
+    }
+
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Task getTask() {
-        return task;
+        return this.task;
     }
-
     public void setTask(Task task) {
         this.task = task;
     }

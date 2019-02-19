@@ -9,6 +9,4 @@ public class ExperimentXApplication {
     public static void main(String[] args) {
         SpringApplication.run(ExperimentXApplication.class, args);
     }
-
 }
-
