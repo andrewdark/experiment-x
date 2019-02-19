@@ -26,6 +26,7 @@ public class Profile {
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId
+    @NotNull
     private User user;
 
     public Profile() {}

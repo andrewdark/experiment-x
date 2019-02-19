@@ -23,6 +23,7 @@ public class Test {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
+    @NotNull
     private Task task;
 
     public Long getVersion() {

@@ -38,10 +38,13 @@ public class Task {
     private Set<Tag> tags = new HashSet<>();
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Test> tests = new ArrayList<>();
+    private Set<Test> tests = new HashSet<>();
 
     @ManyToMany(mappedBy = "tasks")
     private Set<User> users = new HashSet<>();
+
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Solution> solutions = new HashSet<>();
 
     public Task() {}
 
