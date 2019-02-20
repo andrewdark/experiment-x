@@ -23,17 +23,14 @@ import java.util.List;
 @Service
 public class TaskReviewServiceImpl implements TaskReviewService {
 
-    @Value("${docker.client.task.volume}")
-    private String taskVolume;
+    @Value("${docker.client.volume}")
+    private String clientVolume;
 
-    @Value("${docker.client.tests.volume}")
-    private String testsVolume;
-
-    @Value("${docker.client.task.source.path}")
-    private String taskSourcePath;
-
-    @Value("${docker.host.junit.jar}")
+    @Value("${docker.host.volume}")
     private String hostVolume;
+
+    final String sourceFileExt = ".java";
+    final String pathSepartor = "/";
 
 
     @Autowired
@@ -42,8 +39,30 @@ public class TaskReviewServiceImpl implements TaskReviewService {
 
     @Override
     public void review(String code, Long taskId) throws DockerCertificateException, DockerException, InterruptedException, IOException {
+        final DockerClient docker = DefaultDockerClient.fromEnv().build();
+
+        final HostConfig hostConfig = HostConfig
+                .builder()
+                .appendBinds(HostConfig.Bind.from(hostVolume)
+                        .to(clientVolume)
+                        .readOnly(false)
+                        .build())
+                .build();
+
+        final ContainerConfig containerConfig = ContainerConfig
+                .builder()
+                .image("openjdk:11")
+                .volumes(clientVolume)
+                .hostConfig(hostConfig)
+                .cmd("sh", "-c", "while :; do sleep 1; done")
+                .build();
+
+        final ContainerCreation container = docker.createContainer(containerConfig);
+
+        final String containerId = container.id();
 
 
+        cleanUp(docker, containerId);
     }
 
     private static void cleanUp(DockerClient docker, String id) throws DockerException, InterruptedException {
