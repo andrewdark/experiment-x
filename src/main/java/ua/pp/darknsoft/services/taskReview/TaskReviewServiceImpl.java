@@ -29,9 +29,6 @@ public class TaskReviewServiceImpl implements TaskReviewService {
     @Value("${docker.host.volume}")
     private String hostVolume;
 
-    final String sourceFileExt = ".java";
-    final String pathSepartor = "/";
-
 
     @Autowired
     TestsService testsService;
@@ -60,6 +57,7 @@ public class TaskReviewServiceImpl implements TaskReviewService {
         final ContainerCreation container = docker.createContainer(containerConfig);
 
         final String containerId = container.id();
+
 
 
         cleanUp(docker, containerId);
